@@ -115,16 +115,16 @@ $ make dbrollback version=1
 ```
 
 ```sh
-# this for run server dwith environemnet dev
+# this for run server with environemnet dev
 $ make server_dev
 ```
 
 ```sh
-# this for run server dwith environemnet staging
+# this for run server with environemnet staging
 $ make server_stg
 ```
 
 ```sh
-# this for run server dwith environemnet production
+# this for run server with environemnet production
 $ make server_prod
 ```
