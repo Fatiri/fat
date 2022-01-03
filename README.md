@@ -101,30 +101,30 @@ $ make sqlc
 $ make generate_migration table=table_name
 ```
 ```sh
-# this for generate sql on respository
+# this for migration db up
 $ make dbup
 ```
 ```sh
-# this for generate sql on respository
+# this for migration db dwn
 $ make dbdown
 ```
 
 ```sh
-# this for generate sql on respository
-$ make dbrollback
+# this for rollback dirty db version
+$ make dbrollback version=1
 ```
 
 ```sh
-# this for generate sql on respository
+# this for run server dwith environemnet dev
 $ make server_dev
 ```
 
 ```sh
-# this for generate sql on respository
+# this for run server dwith environemnet staging
 $ make server_stg
 ```
 
 ```sh
-# this for generate sql on respository
+# this for run server dwith environemnet production
 $ make server_prod
 ```
