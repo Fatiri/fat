@@ -6,6 +6,14 @@ import (
 	"database/sql"
 )
 
+type Account struct {
+	AccountID int64  `json:"account_id"`
+	Username  string `json:"username"`
+	Password  string `json:"password"`
+	Email     string `json:"email"`
+	Type      string `json:"type"`
+}
+
 type Order struct {
 	OrderID    int64        `json:"order_id"`
 	OrderPrice string       `json:"order_price"`
