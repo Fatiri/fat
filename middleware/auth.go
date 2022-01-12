@@ -24,7 +24,7 @@ type Role string
 // List of role
 var (
 	RoleAdmin Role = "ADMIN"
-	RoleUser  Role = "User"
+	RoleUser  Role = "USER"
 )
 
 type Authentication interface {

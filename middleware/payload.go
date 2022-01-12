@@ -25,14 +25,14 @@ func NewPayload(account repository.Account) (*Payload, error) {
 	}
 
 	timeAsiaJakarta, _ := time.LoadLocation("Asia/Jakarta")
-	now := time.Now().In(timeAsiaJakarta).UTC()
-	end := now.Add(time.Hour * duration)
+	start := time.Now().In(timeAsiaJakarta).UTC()
+	end := start.Add(time.Hour * duration)
 
 	payload := &Payload{
 		ID:        account.AccountID,
 		Username:  account.Username,
 		Type:      account.AccountType,
-		IssuedAt:  now.Unix(),
+		IssuedAt:  start.Unix(),
 		ExpiredAt: end.Unix(),
 	}
 

@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	indodaxorderv1 "github.com/FAT/api/v1/indodax_order"
+	indodaxorderv1 "github.com/FAT/api/v1/indodax/order"
 	"github.com/FAT/common/wrapper"
 	"github.com/FAT/docs"
 	"github.com/FAT/models"
