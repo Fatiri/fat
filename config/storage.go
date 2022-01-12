@@ -8,8 +8,8 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/fat/models"
-	"github.com/fat/repository"
+	"github.com/FAT/models"
+	"github.com/FAT/repository"
 
 	_ "github.com/lib/pq"
 )

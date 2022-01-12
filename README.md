@@ -5,6 +5,7 @@
  - A SQL Compiler [sqlc](https://github.com/kyleconroy/sqlc) installed (**version v1.11.0**)
  - Database Migrations [golang-migrate](https://github.com/golang-migrate/migrate) installed (**version v4.15.1**)
  - Management Configuration File [viper](https://github.com/spf13/viper) installed (**version v1.10.1**)
+ - Open API Documentation [swaggo](https://github.com/swaggo/swag) installed (**version v1.3.3**)
 
  ## Exchange
  - [Indodax](https://indodax.com/)
@@ -25,9 +26,9 @@
 
 ## Installation
 To install FAT, you need to install Go and set your Go workspace first.
-To install Gin package, you need to install Go and set your Go workspace first.
+You need to install Go and set your Go workspace first.
 
-1. The first need [Go](https://golang.org/) installed (**version 1.13+ is required**), then you can use the below Go command to install Gin.
+1. The first need [Go](https://golang.org/) installed (**version 1.16+ is required**), then you can use the below Go command to install Gin.
 
 ```sh
 $ go mod init
@@ -95,6 +96,10 @@ server_prod:
 # example the following below
 # this for generate sql on respository
 $ make sqlc
+```
+```sh
+# this for generate swagger docs
+$ make swagger
 ```
 ```sh
 # this for generate sql file migration on directory ./repository/migrations

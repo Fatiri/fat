@@ -2,11 +2,15 @@ package api
 
 import (
 	"net/http"
+	"strings"
 
-	orderapi "github.com/fat/api/indodax/order"
-	"github.com/fat/common/wrapper"
-	"github.com/fat/models"
+	indodaxorderv1 "github.com/FAT/api/v1/indodax_order"
+	"github.com/FAT/common/wrapper"
+	"github.com/FAT/docs"
+	"github.com/FAT/models"
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 type Server interface {
@@ -25,7 +29,10 @@ func NewServer(config *models.Config) Server {
 
 func (s *ServerCtx) Handler() {
 	s.config.GinRouter = gin.Default()
+
 	s.RouterIndodax()
+	s.RouterSwagger()
+
 	s.config.GinRouter.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, wrapper.RouteNotFound())
 	})
@@ -36,7 +43,17 @@ func (s *ServerCtx) Handler() {
 }
 
 func (s *ServerCtx) RouterIndodax() {
-	orderapi.InjectOrderRouter(s.config)
+	s.config.ServiceType = "indodax"
+	indodaxorderv1.InjectOrderRouter(s.config)
+}
+
+func (s *ServerCtx) RouterSwagger() {
+	docs.SwaggerInfo.Title = s.config.Env.TitleApp
+	docs.SwaggerInfo.Description = s.config.Env.DescriptionApp
+	docs.SwaggerInfo.Version = s.config.Env.VersionApp
+	docs.SwaggerInfo.Host = s.config.Env.AddressApp
+	docs.SwaggerInfo.Schemes = strings.Split(s.config.Env.SchemasApp, ",")
+	s.config.GinRouter.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 }
 
 func (s *ServerCtx) Start() {

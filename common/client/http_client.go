@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/FAT/common/wrapper"
 	"github.com/go-resty/resty/v2"
-	"github.com/fat/common/wrapper"
 )
 
 type ParamaterHttpClient struct {

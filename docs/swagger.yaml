@@ -1,0 +1,189 @@
+definitions:
+  repository.Order:
+    properties:
+      created_at:
+        type: string
+      order_id:
+        type: integer
+      order_price:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  wrapper.MessageError:
+    properties:
+      location:
+        type: string
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+  wrapper.MessageSuccess:
+    properties:
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+info:
+  contact: {}
+paths:
+  /indodax/order:
+    post:
+      consumes:
+      - application/json
+      description: Create new order data to database
+      parameters:
+      - description: Authentication header
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Order payload
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/repository.Order'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/wrapper.MessageSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+      summary: Create order data
+  /indodax/order/:id:
+    delete:
+      description: Delete order Data by ID
+      parameters:
+      - description: Authentication header
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/wrapper.MessageSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+      summary: Delete order
+    get:
+      consumes:
+      - application/json
+      description: get order by ID
+      parameters:
+      - description: Authentication header
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/repository.Order'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+      summary: Show an order data
+  /indodax/order/data:
+    get:
+      consumes:
+      - application/json
+      description: get orders
+      parameters:
+      - description: Authentication header
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: page offset
+        in: query
+        name: page
+        type: integer
+      - description: data size
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/repository.Order'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/wrapper.MessageError'
+      summary: List order
+swagger: "2.0"

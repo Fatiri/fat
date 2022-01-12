@@ -3,20 +3,24 @@
 package repository
 
 import (
-	"database/sql"
+	"time"
+
+	"github.com/google/uuid"
 )
 
 type Account struct {
-	AccountID int64  `json:"account_id"`
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	Email     string `json:"email"`
-	Type      string `json:"type"`
+	AccountID   uuid.UUID `json:"account_id"`
+	Username    string    `json:"username"`
+	Password    string    `json:"password"`
+	Email       string    `json:"email"`
+	AccountType string    `json:"account_type"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }
 
 type Order struct {
-	OrderID    int64        `json:"order_id"`
-	OrderPrice string       `json:"order_price"`
-	CreatedAt  sql.NullTime `json:"created_at"`
-	UpdatedAt  sql.NullTime `json:"updated_at"`
+	OrderID    int64     `json:"order_id"`
+	OrderPrice string    `json:"order_price"`
+	CreatedAt  time.Time `json:"created_at"`
+	UpdatedAt  time.Time `json:"updated_at"`
 }

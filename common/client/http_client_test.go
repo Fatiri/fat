@@ -9,10 +9,10 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/FAT/common/client"
+	"github.com/FAT/common/mocks"
+	"github.com/FAT/common/wrapper"
 	"github.com/stretchr/testify/assert"
-	"github.com/fat/common/client"
-	"github.com/fat/common/mocks"
-	"github.com/fat/common/wrapper"
 )
 
 func init() {

@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 
-	"github.com/fat/api"
-	"github.com/fat/config"
+	"github.com/FAT/api"
+	"github.com/FAT/config"
 	"github.com/gin-gonic/gin"
 )
 

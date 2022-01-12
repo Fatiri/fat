@@ -3,6 +3,6 @@
 CREATE TABLE orders (
   order_id BIGSERIAL PRIMARY KEY,
   order_price  text NOT NULL,
-  created_at timestamp,
-  updated_at timestamp
+  created_at timestamp NOT NULL,
+  updated_at timestamp NOT NULL
 );

@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/fat/models"
+	"github.com/FAT/models"
 	"github.com/spf13/viper"
 )
 

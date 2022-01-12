@@ -3,29 +3,43 @@ package wrapper
 import (
 	"fmt"
 	"runtime"
-
-	"github.com/gin-gonic/gin"
+	"strings"
 )
 
-func ErrorHandler(err error) gin.H {
+type MessageError struct {
+	Status   bool   `json:"status"`
+	Message  string `json:"message"`
+	Location string `json:"location"`
+}
+
+type MessageSuccess struct {
+	Status  bool   `json:"status"`
+	Message string `json:"message"`
+}
+
+func ErrorHandler(err error) MessageError {
 	pc, fn, line, _ := runtime.Caller(1)
-	return gin.H{
-		"status":        false,
-		"message": err.Error(),
-		"location":  fmt.Sprintf("%s[%s:%d]", runtime.FuncForPC(pc).Name(), fn, line),
+	fnSplit := strings.Split(fn,"/")
+	return MessageError{
+		Status:   false,
+		Message:  err.Error(),
+		Location: fmt.Sprintf("%s[%s:%d]", runtime.FuncForPC(pc).Name(), fnSplit[len(fnSplit)-1], line),
 	}
 }
 
-func RouteNotFound() gin.H {
-	return gin.H{
-		"status":        false,
-		"message": "Page not found",
+func RouteNotFound() MessageError {
+	pc, fn, line, _ := runtime.Caller(1)
+	fnSplit := strings.Split(fn,"/")
+	return MessageError{
+		Status:   false,
+		Message:  "Page not found",
+		Location: fmt.Sprintf("%s[%s:%d]", runtime.FuncForPC(pc).Name(), fnSplit[len(fnSplit)-1], line),
 	}
 }
 
-func SuccessHandler() gin.H {
-	return gin.H{
-		"status":  true,
-		"message": "success",
+func SuccessHandler(message string) MessageSuccess {
+	return MessageSuccess{
+		Status:  true,
+		Message: message,
 	}
 }

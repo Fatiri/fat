@@ -5,7 +5,7 @@ package repository
 
 import (
 	"context"
-	"database/sql"
+	"time"
 )
 
 const createOrder = `-- name: CreateOrder :one
@@ -18,10 +18,10 @@ RETURNING order_id, order_price, created_at, updated_at
 `
 
 type CreateOrderParams struct {
-	OrderID    int64        `json:"order_id"`
-	OrderPrice string       `json:"order_price"`
-	CreatedAt  sql.NullTime `json:"created_at"`
-	UpdatedAt  sql.NullTime `json:"updated_at"`
+	OrderID    int64     `json:"order_id"`
+	OrderPrice string    `json:"order_price"`
+	CreatedAt  time.Time `json:"created_at"`
+	UpdatedAt  time.Time `json:"updated_at"`
 }
 
 func (q *Queries) CreateOrder(ctx context.Context, arg CreateOrderParams) (Order, error) {
