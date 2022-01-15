@@ -2,6 +2,8 @@ sqlc:
 	sqlc generate
 swagger:
 	swag init -g api/api.go
+mock:
+	mockery --all --keeptree	
 generate_migration:
 	migrate create -ext sql -dir ./repository/migrations -seq $(table)
 dbup:

@@ -5,21 +5,38 @@ import (
 	"github.com/spf13/viper"
 )
 
-func InitEnvironment(envName string) (env models.Environment) {
-	viper.AddConfigPath(".")
-	viper.SetConfigName(envName)
+type Environment interface {
+	InitEnvironment() (env *models.Environment, err error)
+}
+
+type EnvironmentCtx struct {
+	envName string
+	dirFile string
+}
+
+func NewEnvironment(envName, dirFile string) Environment {
+	return &EnvironmentCtx{
+		envName: envName,
+		dirFile: dirFile,
+	}
+}
+
+func (e *EnvironmentCtx) InitEnvironment() (env *models.Environment, err error) {
+	viper.AddConfigPath(e.dirFile)
+	viper.SetConfigName(e.envName)
 	viper.SetConfigType("env")
 
 	viper.AutomaticEnv()
 
-	err := viper.ReadInConfig()
+	err = viper.ReadInConfig()
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	err = viper.Unmarshal(&env)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
+
 	return
 }

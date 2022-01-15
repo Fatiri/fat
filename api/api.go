@@ -28,8 +28,6 @@ func NewServer(config *models.Config) Server {
 }
 
 func (s *ServerCtx) Handler() {
-	s.config.GinRouter = gin.Default()
-
 	s.RouterIndodax()
 	s.RouterSwagger()
 

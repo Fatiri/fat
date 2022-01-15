@@ -1,26 +1,34 @@
 definitions:
+  models.OrderPayload:
+    properties:
+      order_crypto:
+        type: string
+      order_price:
+        type: number
+      order_type:
+        type: string
+    type: object
   repository.Order:
     properties:
       created_at:
         type: string
+      order_crypto:
+        type: string
       order_id:
         type: integer
       order_price:
+        type: number
+      order_status:
+        type: string
+      order_type:
         type: string
       updated_at:
         type: string
     type: object
-  wrapper.MessageError:
+  wrapper.Response:
     properties:
       location:
         type: string
-      message:
-        type: string
-      status:
-        type: boolean
-    type: object
-  wrapper.MessageSuccess:
-    properties:
       message:
         type: string
       status:
@@ -45,30 +53,30 @@ paths:
         name: message
         required: true
         schema:
-          $ref: '#/definitions/repository.Order'
+          $ref: '#/definitions/models.OrderPayload'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/wrapper.MessageSuccess'
+            $ref: '#/definitions/wrapper.Response'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "422":
           description: Unprocessable Entity
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
       summary: Create order data
   /indodax/order/:id:
     delete:
@@ -88,23 +96,23 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/wrapper.MessageSuccess'
+            $ref: '#/definitions/wrapper.Response'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
       summary: Delete order
     get:
       consumes:
@@ -131,15 +139,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
       summary: Show an order data
   /indodax/order/data:
     get:
@@ -172,18 +180,18 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/wrapper.MessageError'
+            $ref: '#/definitions/wrapper.Response'
       summary: List order
 swagger: "2.0"

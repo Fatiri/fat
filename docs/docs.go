@@ -47,7 +47,7 @@ var doc = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/repository.Order"
+                            "$ref": "#/definitions/models.OrderPayload"
                         }
                     }
                 ],
@@ -55,31 +55,31 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageSuccess"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "422": {
                         "description": "Unprocessable Entity",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     }
                 }
@@ -121,19 +121,19 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     }
                 }
@@ -161,31 +161,31 @@ var doc = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageSuccess"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     }
                 }
@@ -235,25 +235,25 @@ var doc = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/wrapper.MessageError"
+                            "$ref": "#/definitions/wrapper.Response"
                         }
                     }
                 }
@@ -261,16 +261,39 @@ var doc = `{
         }
     },
     "definitions": {
+        "models.OrderPayload": {
+            "type": "object",
+            "properties": {
+                "order_crypto": {
+                    "type": "string"
+                },
+                "order_price": {
+                    "type": "number"
+                },
+                "order_type": {
+                    "type": "string"
+                }
+            }
+        },
         "repository.Order": {
             "type": "object",
             "properties": {
                 "created_at": {
                     "type": "string"
                 },
+                "order_crypto": {
+                    "type": "string"
+                },
                 "order_id": {
                     "type": "integer"
                 },
                 "order_price": {
+                    "type": "number"
+                },
+                "order_status": {
+                    "type": "string"
+                },
+                "order_type": {
                     "type": "string"
                 },
                 "updated_at": {
@@ -278,23 +301,12 @@ var doc = `{
                 }
             }
         },
-        "wrapper.MessageError": {
+        "wrapper.Response": {
             "type": "object",
             "properties": {
                 "location": {
                     "type": "string"
                 },
-                "message": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "boolean"
-                }
-            }
-        },
-        "wrapper.MessageSuccess": {
-            "type": "object",
-            "properties": {
                 "message": {
                     "type": "string"
                 },

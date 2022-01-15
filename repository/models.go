@@ -19,8 +19,11 @@ type Account struct {
 }
 
 type Order struct {
-	OrderID    int64     `json:"order_id"`
-	OrderPrice string    `json:"order_price"`
-	CreatedAt  time.Time `json:"created_at"`
-	UpdatedAt  time.Time `json:"updated_at"`
+	OrderID     int64     `json:"order_id"`
+	OrderPrice  float64   `json:"order_price"`
+	OrderType   string    `json:"order_type"`
+	OrderCrypto string    `json:"order_crypto"`
+	OrderStatus string    `json:"order_status"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }

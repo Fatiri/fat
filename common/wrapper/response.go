@@ -1,34 +1,43 @@
 package wrapper
 
 import (
-	"encoding/json"
-	"net/http"
+	"fmt"
+	"runtime"
+	"strings"
 )
 
-type MapResponse struct {
-	Message string      `json:"message"`
-	Data    interface{} `json:"data,omitempty"`
+type Response struct {
+	Status   bool   `json:"status"`
+	Message  string `json:"message"`
+	Location string `json:"location,omitempty"`
 }
 
-func WriteJSON(w http.ResponseWriter, statusCode int, v interface{}) error {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(statusCode)
-	d, err := json.Marshal(v)
-	if err != nil {
-		return err
+func Error(err error, env string) Response {
+	pc, fn, line, _ := runtime.Caller(1)
+	fnSplit := strings.Split(fn, "/")
+	if env == "release" {
+		return Response{
+			Status:  false,
+			Message: err.Error(),
+		}
 	}
-	_, err = w.Write(d)
-	return err
+	return Response{
+		Status:   false,
+		Message:  err.Error(),
+		Location: fmt.Sprintf("%s[%s:%d]", runtime.FuncForPC(pc).Name(), fnSplit[len(fnSplit)-1], line),
+	}
 }
 
-func RenderJSON(w http.ResponseWriter, statusCode int, v interface{}) {
-	if _, isErr := v.(error); isErr {
-		_ = WriteJSON(w, statusCode, v)
-		return
+func RouteNotFound() Response {
+	return Response{
+		Status:  false,
+		Message: "Page not found",
 	}
-	resp := MapResponse{
-		Message: http.StatusText(statusCode),
-		Data:    v,
+}
+
+func Success(message string) Response {
+	return Response{
+		Status:  true,
+		Message: message,
 	}
-	_ = WriteJSON(w, statusCode, resp)
 }

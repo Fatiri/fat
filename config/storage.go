@@ -14,15 +14,30 @@ import (
 	_ "github.com/lib/pq"
 )
 
+type Storage interface {
+	Postgres() (*repository.Queries, error)
+}
+
+type StorageCtx struct {
+	env *models.Environment
+}
+
+func NewStorage(env *models.Environment) Storage {
+	return &StorageCtx{
+		env: env,
+	}
+}
+
 // Config function connect to database
-func Postgres(env models.Environment) *repository.Queries {
+func (s *StorageCtx) Postgres() (*repository.Queries, error) {
+	fmt.Println(s.env)
 	db, err := sql.Open("postgres",
 		fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-			env.DatabaseHost, env.DatabasePort, env.DatabaseUser, env.DatabasePass, env.DatabaseName,
+			s.env.DatabaseHost, s.env.DatabasePort, s.env.DatabaseUser, s.env.DatabasePass, s.env.DatabaseName,
 		))
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	return repository.New(db)
+	return repository.New(db), nil
 }

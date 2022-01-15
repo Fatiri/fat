@@ -44,7 +44,7 @@ func (p *PayloadSHA512) GenerateGetInfoIndodax() (string, string) {
 	return sha, data.Encode()
 }
 
-func (p *PayloadSHA512) GenerateTradeIndodax() (string, string) {
+func (p *PayloadSHA512) GenerateOrderIndodax() (string, string) {
 	data := url.Values{}
 	data.Set("method", p.Method)
 	data.Set("timestamp", strconv.Itoa(int(p.Timestamp)))

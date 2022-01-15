@@ -2,6 +2,7 @@ package client_test
 
 import (
 	"bytes"
+	"errors"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -10,8 +11,7 @@ import (
 	"testing"
 
 	"github.com/FAT/common/client"
-	"github.com/FAT/common/mocks"
-	"github.com/FAT/common/wrapper"
+	mocks "github.com/FAT/mocks/common/client"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -72,10 +72,7 @@ func TestHttpClient(t *testing.T) {
 			expectedResult: expected{
 				statusCoce: 400,
 				reader:     nil,
-				err: wrapper.NewMultiStringError(false, wrapper.MultilangMessage{
-					In: "Failed get data from client",
-					Id: "Gagal mendapatkan data dari client",
-				}),
+				err:        errors.New("error"),
 				parameter: &client.ParamaterHttpClient{
 					Headers: []client.RequestDefault{
 						{
@@ -176,10 +173,7 @@ func TestHttpClientV2(t *testing.T) {
 			expectedResult: expected{
 				statusCoce: 400,
 				reader:     nil,
-				err: wrapper.NewMultiStringError(false, wrapper.MultilangMessage{
-					In: "Failed get data from client",
-					Id: "Gagal mendapatkan data dari client",
-				}),
+				err:        errors.New("error"),
 				parameter: &client.ParamaterHttpClient{
 					Headers: []client.RequestDefault{
 						{

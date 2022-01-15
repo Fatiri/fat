@@ -11,7 +11,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/FAT/common/wrapper"
 	"github.com/go-resty/resty/v2"
 )
 
@@ -60,10 +59,7 @@ func HttpClient(param *ParamaterHttpClient) (*http.Response, error) {
 
 	request, err := http.NewRequest(param.Method, param.URL, nil)
 	if err != nil {
-		return nil, wrapper.NewMultiStringError(false, wrapper.MultilangMessage{
-			In: err.Error(),
-			Id: err.Error(),
-		})
+		return nil, err
 	}
 	for _, header := range param.Headers {
 		request.Header.Set(header.Key, header.Value)
@@ -83,17 +79,11 @@ func HttpClient(param *ParamaterHttpClient) (*http.Response, error) {
 
 	response, err := Client.Do(request)
 	if err != nil {
-		return nil, wrapper.NewMultiStringError(false, wrapper.MultilangMessage{
-			In: err.Error(),
-			Id: err.Error(),
-		})
+		return nil, err
 	}
 
 	if response.StatusCode != 200 {
-		return nil, wrapper.NewMultiStringError(false, wrapper.MultilangMessage{
-			In: "Failed get data from client",
-			Id: "Gagal mendapatkan data dari client",
-		})
+		return nil, err
 	}
 
 	return response, nil
@@ -102,10 +92,7 @@ func HttpClient(param *ParamaterHttpClient) (*http.Response, error) {
 func HttpClientV2(param *ParamaterHttpClient, req string) (*http.Response, error) {
 	request, err := http.NewRequest(param.Method, param.URL, strings.NewReader(req))
 	if err != nil {
-		return nil, wrapper.NewMultiStringError(false, wrapper.MultilangMessage{
-			In: err.Error(),
-			Id: err.Error(),
-		})
+		return nil, err
 	}
 
 	for _, header := range param.Headers {
@@ -126,17 +113,11 @@ func HttpClientV2(param *ParamaterHttpClient, req string) (*http.Response, error
 
 	response, err := Client.Do(request)
 	if err != nil {
-		return nil, wrapper.NewMultiStringError(false, wrapper.MultilangMessage{
-			In: err.Error(),
-			Id: err.Error(),
-		})
+		return nil, err
 	}
 
 	if response.StatusCode != 200 {
-		return nil, wrapper.NewMultiStringError(false, wrapper.MultilangMessage{
-			In: "Failed get data from client",
-			Id: "Gagal mendapatkan data dari client",
-		})
+		return nil, err
 	}
 
 	return response, nil
@@ -160,10 +141,7 @@ func HTTPClientTokoCrypto(param *ParamaterHttpClient) (*resty.Response, error) {
 func ReadHttpResponse(response *http.Response) ([]byte, error) {
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		return nil, wrapper.NewMultiStringError(false, wrapper.MultilangMessage{
-			In: err.Error(),
-			Id: err.Error(),
-		})
+		return nil, err
 	}
 
 	return body, nil
