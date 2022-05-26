@@ -3,9 +3,9 @@ package indodaxorderv1
 import (
 	"fmt"
 
-	"github.com/FAT/middleware"
-	"github.com/FAT/models"
-	"github.com/FAT/repository"
+	"github.com/fat/middleware"
+	"github.com/fat/models"
+	"github.com/fat/repository"
 	"github.com/google/uuid"
 )
 
@@ -24,9 +24,9 @@ func NewRouter(orderHandler *OrderHandler, config *models.Config) *Router {
 func (r *Router) RegisterRouter() {
 	auth, _ := middleware.NewAuthentication(r.config)
 	indodax := r.config.GinRouter.Group(r.config.ServiceType)
-	uuid,_ := uuid.NewRandom()
+	uuid, _ := uuid.NewRandom()
 	acc := repository.Account{
-		AccountID: uuid,
+		AccountID:   uuid,
 		AccountType: "ADMIN",
 	}
 	token, _ := auth.CreateToken(acc)

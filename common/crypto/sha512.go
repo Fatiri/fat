@@ -15,7 +15,7 @@ type PayloadSHA512 struct {
 	RecvWindow string  `json:"recwindow"`
 	Type       string  `json:"type"`
 	Price      string  `json:"price"`
-	IDR        float64 `json:"idr"`
+	IDR        string `json:"idr"`
 	BTC        string  `json:"btc"`
 	Pair       string  `json:"pair"`
 	OrderID    int64   `json:"order_id"`
@@ -54,7 +54,7 @@ func (p *PayloadSHA512) GenerateOrderIndodax() (string, string) {
 
 	switch strings.ToLower(p.Type) {
 	case "buy":
-		data.Set("idr", strconv.Itoa(int(p.IDR)))
+		data.Set("idr", p.IDR)
 	case "sell":
 		data.Set("btc", p.BTC)
 	}
@@ -71,6 +71,18 @@ func (p *PayloadSHA512) GenerateGetOrderIndodax() (string, string) {
 	data.Set("timestamp", strconv.Itoa(int(p.Timestamp)))
 	data.Set("pair", p.Pair)
 	data.Set("order_id", strconv.Itoa(int(p.OrderID)))
+
+	p.Data = data.Encode()
+	sha := p.GenerateHMACSHA512()
+
+	return sha, data.Encode()
+}
+
+func (p *PayloadSHA512) GenerateGetOrderHistoryIndodax() (string, string) {
+	data := url.Values{}
+	data.Set("method", p.Method)
+	data.Set("pair", p.Pair)
+	data.Set("nonce", strconv.Itoa(int(p.Timestamp)))
 
 	p.Data = data.Encode()
 	sha := p.GenerateHMACSHA512()

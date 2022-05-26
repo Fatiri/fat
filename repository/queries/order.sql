@@ -9,9 +9,9 @@ OFFSET $2;
 
 -- name: CreateOrder :one
 INSERT INTO orders (
-  order_id, order_price, order_type,order_crypto, order_status, created_at, updated_at
+  order_id, order_price,idr, btc, order_type, order_crypto, order_status, created_at, updated_at
 ) VALUES (
-  $1, $2, $3, $4, $5, $6, $7
+  $1, $2, $3, $4, $5, $6, $7, $8, $9
 )
 RETURNING *;
 

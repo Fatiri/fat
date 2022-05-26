@@ -6,6 +6,7 @@ import (
 
 type PayloadNumber struct {
 	NumberOne int
+	ListInt64 []int64
 }
 
 func (p *PayloadNumber) MakeNumberToBeFloat() float64 {
@@ -25,4 +26,20 @@ func (p *PayloadNumber) MakeNumberToBeFloat() float64 {
 	response, _ := strconv.ParseFloat(res, 64)
 	return response
 
+}
+
+func (p *PayloadNumber) RemoveDuplicateValues() []int64 {
+	keys := make(map[int64]bool)
+	list := []int64{}
+
+	// If the key(values of the slice) is not equal
+	// to the already present value in new slice (list)
+	// then we append it. else we jump on another element.
+	for _, entry := range p.ListInt64 {
+		if _, value := keys[entry]; !value {
+			keys[entry] = true
+			list = append(list, entry)
+		}
+	}
+	return list
 }

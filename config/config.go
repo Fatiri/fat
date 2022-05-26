@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/FAT/models"
+	"github.com/fat/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,16 +24,17 @@ func NewConfig(env Environment, storage Storage) Config {
 func (c *ConfigCtx) InitConfig() (conf *models.Config, err error) {
 	env, err := c.env.InitEnvironment()
 	if err != nil {
-		return nil ,err
+		return nil, err
 	}
 	storage, err := c.storage.Postgres()
 	if err != nil {
-		return nil ,err
+		return nil, err
 	}
-	
+
 	conf = &models.Config{
 		Env:       env,
 		Storage:   storage,
+		ServiceType: env.EnvApp,
 		GinRouter: gin.Default(),
 	}
 

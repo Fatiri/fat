@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/FAT/repository"
+	"github.com/fat/repository"
 )
 
 func (auth *AuthenticationCtx) CreateToken(account repository.Account) (string, error) {

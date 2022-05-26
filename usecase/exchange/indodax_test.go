@@ -4,9 +4,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/FAT/models"
-	"github.com/FAT/repository"
-	"github.com/FAT/usecase/webhook"
+	"github.com/fat/models"
+	"github.com/fat/repository"
+	"github.com/fat/usecase/webhook"
 	"github.com/gin-gonic/gin"
 )
 

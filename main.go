@@ -4,10 +4,12 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/FAT/api"
-	"github.com/FAT/common/times"
-	"github.com/FAT/common/wrapper"
-	"github.com/FAT/config"
+	"github.com/fat/app/api"
+	"github.com/fat/app/cli"
+	"github.com/fat/app/gui"
+	"github.com/fat/common/times"
+	"github.com/fat/config"
+	"github.com/fat/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,19 +19,40 @@ func init() {
 
 func main() {
 	environment := flag.String("environment", "", "The environment file name")
+	service := flag.String("service", "", "The environment file name")
 	flag.Parse()
 
-	env := config.NewEnvironment(*environment, "./config")
+	env := config.NewEnvironment(*environment, "config")
 	envData, _ := env.InitEnvironment()
 	storage := config.NewStorage(envData)
-	
+
 	config, err := config.NewConfig(env, storage).InitConfig()
 	if err != nil {
-		fmt.Println(wrapper.Error(err, config.Env.EnvApp))
+		fmt.Println(err)
+		return
 	}
-	
+
 	config.Time = times.ProvideNewTimesCustom()
 
-	server := api.NewServer(config)
-	server.Start()
+	if *service == "GUI" {
+		GUI(config)
+	} else if *service == "CLI" {
+		CLI(config)
+	} else if *service == "API" {
+		API(config)
+	} else {
+		fmt.Println("error : service must be GUI, CLI or API")
+	}
+}
+
+func GUI(config *models.Config) {
+	gui.NewGUI(config).Run()
+}
+
+func CLI(config *models.Config) {
+	cli.NewCLI(config).Run()
+}
+
+func API(config *models.Config) {
+	api.NewServer(config).Start()
 }

@@ -1,4 +1,34 @@
 definitions:
+  models.MarketHistory:
+    properties:
+      close:
+        items:
+          type: number
+        type: array
+      high:
+        items:
+          type: number
+        type: array
+      low:
+        items:
+          type: number
+        type: array
+      open:
+        items:
+          type: number
+        type: array
+    type: object
+  models.MarketHistoryPayload:
+    properties:
+      from:
+        type: integer
+      symbol:
+        type: string
+      timeFrame:
+        type: integer
+      to:
+        type: integer
+    type: object
   models.OrderPayload:
     properties:
       order_crypto:
@@ -37,6 +67,43 @@ definitions:
 info:
   contact: {}
 paths:
+  /indodax/market_history:
+    post:
+      consumes:
+      - application/json
+      description: get market history
+      parameters:
+      - description: Authentication header
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: market history payload
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/models.MarketHistoryPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.MarketHistory'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/wrapper.Response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/wrapper.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/wrapper.Response'
+      summary: Show an market history data
   /indodax/order:
     post:
       consumes:
@@ -78,7 +145,7 @@ paths:
           schema:
             $ref: '#/definitions/wrapper.Response'
       summary: Create order data
-  /indodax/order/:id:
+  /indodax/order/{id}:
     delete:
       description: Delete order Data by ID
       parameters:

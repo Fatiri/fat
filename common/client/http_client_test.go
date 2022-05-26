@@ -6,12 +6,11 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"strconv"
 	"testing"
 
-	"github.com/FAT/common/client"
-	mocks "github.com/FAT/mocks/common/client"
+	"github.com/fat/common/client"
+	mocks "github.com/fat/mocks/common/client"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -93,7 +92,7 @@ func TestHttpClient(t *testing.T) {
 			expectedResult: expected{
 				statusCoce: 400,
 				reader:     nil,
-				err:        nil,
+				err:        errors.New("Bad Request"),
 				parameter: &client.ParamaterHttpClient{
 					Headers: []client.RequestDefault{
 						{
@@ -194,7 +193,7 @@ func TestHttpClientV2(t *testing.T) {
 			expectedResult: expected{
 				statusCoce: 400,
 				reader:     nil,
-				err:        nil,
+				err:        errors.New("Bad Request"),
 				parameter: &client.ParamaterHttpClient{
 					Headers: []client.RequestDefault{
 						{
@@ -289,7 +288,7 @@ func TestRequestClientHeaderIndodax(t *testing.T) {
 			want: []client.RequestDefault{
 				{
 					Key:   "Key",
-					Value: os.Getenv("PUBLIC_KEY"),
+					Value: "1234",
 				},
 				{
 					Key:   "Sign",
@@ -311,7 +310,7 @@ func TestRequestClientHeaderIndodax(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			output := client.RequestClientHeaderIndodax(tt.args.sign, tt.args.urlEncode)
+			output := client.RequestClientHeaderIndodax(tt.args.sign, tt.args.urlEncode, "1234")
 			tt.funcUseCaseShouldBe(t, output, tt.want)
 		})
 	}

@@ -4,10 +4,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/FAT/config"
-	mocksConfig "github.com/FAT/mocks/config"
-	"github.com/FAT/models"
-	"github.com/FAT/repository"
+	"github.com/fat/config"
+	mocksConfig "github.com/fat/mocks/config"
+	"github.com/fat/models"
+	"github.com/fat/repository"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -29,15 +29,16 @@ func provideUsecaseMockConfig(m *mock) config.Config {
 
 func TestConfigCtx_InitConfig(t *testing.T) {
 	type expectedData struct {
-		env  *models.Environment
-		repo *repository.Queries
-		errEnv error
+		env        *models.Environment
+		repo       *repository.Queries
+		errEnv     error
+		errStorage error
 	}
 
 	helperTest := func(ex expectedData) *mock {
 		mc := provideMockConfig()
 		mc.env.On("InitEnvironment").Return(ex.env, ex.errEnv).Once()
-		mc.storage.On("Postgres").Return(ex.repo).Once()
+		mc.storage.On("Postgres").Return(ex.repo, ex.errStorage).Once()
 		return mc
 	}
 
@@ -50,21 +51,36 @@ func TestConfigCtx_InitConfig(t *testing.T) {
 		{
 			name: "Should get error environment",
 			expected: expectedData{
-				env:  &models.Environment{},
-				repo: &repository.Queries{},
-				errEnv: errors.New("env file not found"),
+				env:        &models.Environment{},
+				repo:       &repository.Queries{},
+				errEnv:     errors.New("env file not found"),
+				errStorage: nil,
 			},
 			funcUseCaseShouldBe: func(t *testing.T, output *models.Config, err error) {
-				assert.NotNil(t, output)
+				assert.Nil(t, output)
+				assert.Error(t, err)
+			},
+		},
+		{
+			name: "Should get error storage",
+			expected: expectedData{
+				env:        &models.Environment{},
+				repo:       &repository.Queries{},
+				errEnv:     nil,
+				errStorage: errors.New("failed setup config storage"),
+			},
+			funcUseCaseShouldBe: func(t *testing.T, output *models.Config, err error) {
+				assert.Nil(t, output)
 				assert.Error(t, err)
 			},
 		},
 		{
 			name: "Should return config data",
 			expected: expectedData{
-				env:  &models.Environment{},
-				repo: &repository.Queries{},
-				errEnv: nil,
+				env:        &models.Environment{},
+				repo:       &repository.Queries{},
+				errEnv:     nil,
+				errStorage: nil,
 			},
 			funcUseCaseShouldBe: func(t *testing.T, output *models.Config, err error) {
 				assert.NotNil(t, output)

@@ -3,3 +3,6 @@ staging.env
 production.env
 go.mod
 go.sum
+
+fyne-cross/
+.DS_Store

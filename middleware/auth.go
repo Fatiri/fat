@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/FAT/common/wrapper"
-	"github.com/FAT/models"
-	"github.com/FAT/repository"
 	"github.com/aead/chacha20poly1305"
+	"github.com/fat/common/wrapper"
+	"github.com/fat/models"
+	"github.com/fat/repository"
 	"github.com/gin-gonic/gin"
 	"github.com/o1egl/paseto"
 )
@@ -48,7 +48,7 @@ func NewAuthentication(conf *models.Config) (Authentication, error) {
 	auth := &AuthenticationCtx{
 		paseto:       paseto.NewV2(),
 		symmetricKey: []byte(conf.Env.SymmetricKey),
-		config: conf,
+		config:       conf,
 	}
 
 	return auth, nil

@@ -1,13 +1,12 @@
 package indodaxorderv1
 
 import (
-	"fmt"
 	"net/http"
 
-	"github.com/FAT/common/wrapper"
-	"github.com/FAT/models"
-	"github.com/FAT/repository"
-	"github.com/FAT/usecase/exchange"
+	"github.com/fat/common/wrapper"
+	"github.com/fat/models"
+	"github.com/fat/repository"
+	"github.com/fat/usecase/exchange"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,7 +18,7 @@ type OrderHandler struct {
 func NewOrderHandler(config *models.Config) *OrderHandler {
 	return &OrderHandler{
 		config:  config,
-		indodax: exchange.NewIndodaxOrder(config),
+		indodax: exchange.NewIndodax(config),
 	}
 }
 
@@ -74,7 +73,7 @@ type getOrderRequest struct {
 // @Failure      400            {object}  wrapper.Response
 // @Failure      404            {object}  wrapper.Response
 // @Failure      401            {object}  wrapper.Response
-// @Router       /indodax/order/:id [get]
+// @Router       /indodax/order/{id} [get]
 func (oh *OrderHandler) GetOrder(ctx *gin.Context) {
 	var req getOrderRequest
 	if err := ctx.ShouldBindUri(&req); err != nil {
@@ -84,7 +83,6 @@ func (oh *OrderHandler) GetOrder(ctx *gin.Context) {
 
 	order, err := oh.config.Storage.GetOrder(ctx, req.OrderID)
 	if err != nil {
-		fmt.Println(err)
 		ctx.JSON(http.StatusNotFound, wrapper.Error(err, oh.config.Env.EnvApp))
 		return
 	}
@@ -142,7 +140,7 @@ func (oh *OrderHandler) ListOrder(ctx *gin.Context) {
 // @Failure      404  {object}  wrapper.Response
 // @Failure      500  {object}  wrapper.Response
 // @Failure      401  {object}  wrapper.Response
-// @Router       /indodax/order/:id [delete]
+// @Router       /indodax/order/{id} [delete]
 func (oh *OrderHandler) DeleteOrder(ctx *gin.Context) {
 	var req repository.CreateOrderParams
 	if err := ctx.ShouldBindUri(req); err != nil {

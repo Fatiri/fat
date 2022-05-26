@@ -20,7 +20,9 @@ type Account struct {
 
 type Order struct {
 	OrderID     int64     `json:"order_id"`
-	OrderPrice  float64   `json:"order_price"`
+	OrderPrice  string    `json:"order_price"`
+	Idr         string    `json:"idr"`
+	Btc         string    `json:"btc"`
 	OrderType   string    `json:"order_type"`
 	OrderCrypto string    `json:"order_crypto"`
 	OrderStatus string    `json:"order_status"`

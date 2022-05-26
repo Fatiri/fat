@@ -1,6 +1,6 @@
 package indodaxorderv1
 
-import "github.com/FAT/models"
+import "github.com/fat/models"
 
 func InjectOrderRouter(config *models.Config) {
 	handlers := NewOrderHandler(config)

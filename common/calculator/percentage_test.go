@@ -3,7 +3,7 @@ package calculator_test
 import (
 	"testing"
 
-	"github.com/FAT/common/calculator"
+	"github.com/fat/common/calculator"
 	"github.com/stretchr/testify/assert"
 )
 

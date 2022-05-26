@@ -6,11 +6,11 @@ import (
 	"net"
 	"net/http"
 	"net/url"
-	"os"
 	"strconv"
 	"strings"
 	"time"
 
+	"github.com/fat/models"
 	"github.com/go-resty/resty/v2"
 )
 
@@ -82,10 +82,6 @@ func HttpClient(param *ParamaterHttpClient) (*http.Response, error) {
 		return nil, err
 	}
 
-	if response.StatusCode != 200 {
-		return nil, err
-	}
-
 	return response, nil
 }
 
@@ -116,10 +112,6 @@ func HttpClientV2(param *ParamaterHttpClient, req string) (*http.Response, error
 		return nil, err
 	}
 
-	if response.StatusCode != 200 {
-		return nil, err
-	}
-
 	return response, nil
 }
 
@@ -147,11 +139,11 @@ func ReadHttpResponse(response *http.Response) ([]byte, error) {
 	return body, nil
 }
 
-func RequestClientHeaderIndodax(sign, urlEncode string) []RequestDefault {
+func RequestClientHeaderIndodax(sign, urlEncode, publicKey string) []RequestDefault {
 	return []RequestDefault{
 		{
 			Key:   "Key",
-			Value: os.Getenv("INDODAX_PUBLIC_KEY"),
+			Value: publicKey,
 		},
 		{
 			Key:   "Sign",
@@ -164,6 +156,27 @@ func RequestClientHeaderIndodax(sign, urlEncode string) []RequestDefault {
 		{
 			Key:   "Content-Length",
 			Value: strconv.Itoa(len(urlEncode)),
+		},
+	}
+}
+
+func RequestClientHeaderIndodaxV2(payload *models.MarketHistoryPayload) []RequestDefault {
+	return []RequestDefault{
+		{
+			Key:   "symbol",
+			Value: payload.Symbol,
+		},
+		{
+			Key:   "tf",
+			Value: payload.TimeFrame,
+		},
+		{
+			Key:   "from",
+			Value: strconv.Itoa(int(payload.From)),
+		},
+		{
+			Key:   "to",
+			Value: strconv.Itoa(int(payload.To)),
 		},
 	}
 }

@@ -3,15 +3,14 @@ package config_test
 import (
 	"testing"
 
-	"github.com/FAT/config"
-	"github.com/FAT/models"
+	"github.com/fat/config"
+	"github.com/fat/models"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestEnvironmentCtx_InitEnvironment(t *testing.T) {
 	type expectedData struct {
 		envName, dirFile string
-		
 	}
 
 	tests := []struct {

@@ -10,16 +10,18 @@ import (
 
 const createOrder = `-- name: CreateOrder :one
 INSERT INTO orders (
-  order_id, order_price, order_type,order_crypto, order_status, created_at, updated_at
+  order_id, order_price,idr, btc, order_type, order_crypto, order_status, created_at, updated_at
 ) VALUES (
-  $1, $2, $3, $4, $5, $6, $7
+  $1, $2, $3, $4, $5, $6, $7, $8, $9
 )
-RETURNING order_id, order_price, order_type, order_crypto, order_status, created_at, updated_at
+RETURNING order_id, order_price, idr, btc, order_type, order_crypto, order_status, created_at, updated_at
 `
 
 type CreateOrderParams struct {
 	OrderID     int64     `json:"order_id"`
-	OrderPrice  float64   `json:"order_price"`
+	OrderPrice  string    `json:"order_price"`
+	Idr         string    `json:"idr"`
+	Btc         string    `json:"btc"`
 	OrderType   string    `json:"order_type"`
 	OrderCrypto string    `json:"order_crypto"`
 	OrderStatus string    `json:"order_status"`
@@ -31,6 +33,8 @@ func (q *Queries) CreateOrder(ctx context.Context, arg CreateOrderParams) (Order
 	row := q.queryRow(ctx, q.createOrderStmt, createOrder,
 		arg.OrderID,
 		arg.OrderPrice,
+		arg.Idr,
+		arg.Btc,
 		arg.OrderType,
 		arg.OrderCrypto,
 		arg.OrderStatus,
@@ -41,6 +45,8 @@ func (q *Queries) CreateOrder(ctx context.Context, arg CreateOrderParams) (Order
 	err := row.Scan(
 		&i.OrderID,
 		&i.OrderPrice,
+		&i.Idr,
+		&i.Btc,
 		&i.OrderType,
 		&i.OrderCrypto,
 		&i.OrderStatus,
@@ -61,7 +67,7 @@ func (q *Queries) DeleteOrder(ctx context.Context, orderID int64) error {
 }
 
 const getOrder = `-- name: GetOrder :one
-SELECT order_id, order_price, order_type, order_crypto, order_status, created_at, updated_at FROM orders
+SELECT order_id, order_price, idr, btc, order_type, order_crypto, order_status, created_at, updated_at FROM orders
 WHERE order_id = $1 LIMIT 1
 `
 
@@ -71,6 +77,8 @@ func (q *Queries) GetOrder(ctx context.Context, orderID int64) (Order, error) {
 	err := row.Scan(
 		&i.OrderID,
 		&i.OrderPrice,
+		&i.Idr,
+		&i.Btc,
 		&i.OrderType,
 		&i.OrderCrypto,
 		&i.OrderStatus,
@@ -81,7 +89,7 @@ func (q *Queries) GetOrder(ctx context.Context, orderID int64) (Order, error) {
 }
 
 const listOrder = `-- name: ListOrder :many
-SELECT order_id, order_price, order_type, order_crypto, order_status, created_at, updated_at FROM orders
+SELECT order_id, order_price, idr, btc, order_type, order_crypto, order_status, created_at, updated_at FROM orders
 LIMIT $1
 OFFSET $2
 `
@@ -103,6 +111,8 @@ func (q *Queries) ListOrder(ctx context.Context, arg ListOrderParams) ([]Order, 
 		if err := rows.Scan(
 			&i.OrderID,
 			&i.OrderPrice,
+			&i.Idr,
+			&i.Btc,
 			&i.OrderType,
 			&i.OrderCrypto,
 			&i.OrderStatus,

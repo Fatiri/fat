@@ -4,10 +4,11 @@ import (
 	"net/http"
 	"strings"
 
-	indodaxorderv1 "github.com/FAT/api/v1/indodax/order"
-	"github.com/FAT/common/wrapper"
-	"github.com/FAT/docs"
-	"github.com/FAT/models"
+	indodaxmarketv1 "github.com/fat/app/api/v1/indodax/market"
+	indodaxorderv1 "github.com/fat/app/api/v1/indodax/order"
+	"github.com/fat/common/wrapper"
+	"github.com/fat/docs"
+	"github.com/fat/models"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
@@ -43,6 +44,7 @@ func (s *ServerCtx) Handler() {
 func (s *ServerCtx) RouterIndodax() {
 	s.config.ServiceType = "indodax"
 	indodaxorderv1.InjectOrderRouter(s.config)
+	indodaxmarketv1.InjectMarketRouter(s.config)
 }
 
 func (s *ServerCtx) RouterSwagger() {

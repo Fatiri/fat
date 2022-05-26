@@ -26,3 +26,31 @@ func (_m *Time) Now(timeGMT *int) time.Time {
 
 	return r0
 }
+
+// TimpStampToDate provides a mock function with given fields: timeStr, layout
+func (_m *Time) TimpStampToDate(timeStr string, layout string) time.Time {
+	ret := _m.Called(timeStr, layout)
+
+	var r0 time.Time
+	if rf, ok := ret.Get(0).(func(string, string) time.Time); ok {
+		r0 = rf(timeStr, layout)
+	} else {
+		r0 = ret.Get(0).(time.Time)
+	}
+
+	return r0
+}
+
+// TimpStampToDateStr provides a mock function with given fields: timeStr, layout
+func (_m *Time) TimpStampToDateStr(timeStr string, layout string) string {
+	ret := _m.Called(timeStr, layout)
+
+	var r0 string
+	if rf, ok := ret.Get(0).(func(string, string) string); ok {
+		r0 = rf(timeStr, layout)
+	} else {
+		r0 = ret.Get(0).(string)
+	}
+
+	return r0
+}
