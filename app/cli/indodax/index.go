@@ -101,7 +101,7 @@ func (icc *IndodaxCLICtx) RSI(closePrices []float64) (upPrice bool, downPrice bo
 }
 
 func (icc *IndodaxCLICtx) Telegram(saldo, btc, closePrice, rsiValue float64, symbol string, upPrice, DownPrice bool) {
-	bot, err := tgbotapi.NewBotAPI("5393311612:AAEwuHHoIAUwxRrhm2YVqad8CWO2V7RB3EQ")
+	bot, err := tgbotapi.NewBotAPI(icc.config.Env.TelegramAPIToken)
 	if err != nil {
 		fmt.Println(err)
 	}

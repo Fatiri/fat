@@ -27,6 +27,7 @@ type Environment struct {
 	DatabaseUser            string `mapstructure:"DATABASE_USER"`
 	DatabasePass            string `mapstructure:"DATABASE_PASS"`
 	DatabaseName            string `mapstructure:"DATABASE_NAME"`
+	TelegramAPIToken        string `mapstructure:"TELEGRAM_API_TOKEN"`
 	IndodaxPrivateURL       string `mapstructure:"INDODAX_PRIVATE_URL"`
 	IndodaxMarketHistoryURL string `mapstructure:"INDODAX_MARKET_HISTORY_URL"`
 	IndodaxMarketPendingURL string `mapstructure:"INDODAX_MARKET_PENDING_URL"`
