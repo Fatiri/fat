@@ -1,5 +1,7 @@
 package constant
 
+var Debug string = "debug"
+var Staging string = "staging"
 var TrenMacdBullish string = "Bullish"
 var TrenMacdBearish string = "Bearish"
 var TrenMacdBullishDivergence string = "Bullish Divergence"
