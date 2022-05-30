@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/fat/common/indikators"
+	"github.com/fat/common/mailer"
 	"github.com/fat/models"
 	"github.com/fat/usecase/exchange"
 	"github.com/fat/usecase/telegram"
@@ -19,13 +20,15 @@ type IndodaxCLICtx struct {
 	config   *models.Config
 	exchange exchange.Indodax
 	telegram telegram.Telegram
+	gmail    mailer.Gmail
 }
 
-func NewIndodaxCLI(config *models.Config, exchange exchange.Indodax, telegram telegram.Telegram) IndodaxCLI {
+func NewIndodaxCLI(config *models.Config, exchange exchange.Indodax, telegram telegram.Telegram, gmail mailer.Gmail) IndodaxCLI {
 	return &IndodaxCLICtx{
 		config:   config,
 		exchange: exchange,
 		telegram: telegram,
+		gmail:    gmail,
 	}
 }
 
@@ -40,7 +43,7 @@ func (icc *IndodaxCLICtx) Run() error {
 	saldo := 15630000.00
 	btc := 0.00
 	for {
-		_, _, second := time.Now().Clock()
+		hour, minute, second := time.Now().Clock()
 		if second == 59 {
 			marketHistoryIndodax, errorMarketHistory := icc.exchange.MarketHistory(context.Background(), payload)
 			if errorMarketHistory != nil {
@@ -68,11 +71,18 @@ func (icc *IndodaxCLICtx) Run() error {
 			}
 
 			messages := []string{
-				fmt.Sprintf("Information  \n Saldo : %2.f \n BTC   : %f \n Pair    : %s", saldo, btc, payload.Symbol),
-				fmt.Sprintf("RSI   \n Up Price       : %t \n Down Price  : %t \n Close Price  : %2.f \n rsi                 : %2.f", upPrice, downPrice, mh.Close[len(mh.Close)-1], rsiResult),
+				fmt.Sprintf("Information  <br> Saldo : %2.f <br> BTC : %f <br> Pair : %s <br><br>", saldo, btc, payload.Symbol),
+				fmt.Sprintf("RSI   <br> Up Price : %t <br> Down Price : %t <br> Close Price : %2.f <br> rsi : %2.f", upPrice, downPrice, mh.Close[len(mh.Close)-1], rsiResult),
 			}
+			fmt.Println(hour,minute)
 
-			go icc.telegram.Bot(messages)
+			if (hour%2 == 0 && minute == 1) {
+				icc.gmail.V1(mailer.GmailPayload{
+					ReceiverEmail: icc.config.Env.ReceiverMailReport,
+					Subject:       icc.config.Env.TitleApp,
+					Message:       messages[0] + messages[1],
+				})
+			}
 			time.Sleep(time.Second * 10)
 		}
 	}

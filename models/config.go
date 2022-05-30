@@ -28,9 +28,15 @@ type Environment struct {
 	DatabasePass            string `mapstructure:"DATABASE_PASS"`
 	DatabaseName            string `mapstructure:"DATABASE_NAME"`
 	TelegramAPIToken        string `mapstructure:"TELEGRAM_API_TOKEN"`
+	GmailHost               string `mapstructure:"GMAIL_HOST"`
+	GmailPort               string `mapstructure:"GMAIL_PORT"`
+	GmailSenderAddress      string `mapstructure:"GMAIL_SENDER_ADDRESS"`
+	GmailUsername           string `mapstructure:"GMAIL_USERNAME"`
+	GmailPassword           string `mapstructure:"GMAIL_PASSWORD"`
 	IndodaxPrivateURL       string `mapstructure:"INDODAX_PRIVATE_URL"`
 	IndodaxMarketHistoryURL string `mapstructure:"INDODAX_MARKET_HISTORY_URL"`
 	IndodaxMarketPendingURL string `mapstructure:"INDODAX_MARKET_PENDING_URL"`
 	IndodaxPublicKey        string `mapstructure:"INDODAX_PUBLIC_KEY"`
 	IndodaxPrivateKey       string `mapstructure:"INDODAX_PRIVATE_KEY"`
+	ReceiverMailReport      string `mapstructure:"RECEIVER_MAIL_REPORT"`
 }
