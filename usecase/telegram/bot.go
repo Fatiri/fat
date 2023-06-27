@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/fat/common/constant"
-	"github.com/fat/models"
+	"github.com/Fatiri/fat/common/constant"
+	"github.com/Fatiri/fat/models"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 

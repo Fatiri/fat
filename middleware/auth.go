@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/Fatiri/fat/common/wrapper"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/repository"
 	"github.com/aead/chacha20poly1305"
-	"github.com/fat/common/wrapper"
-	"github.com/fat/models"
-	"github.com/fat/repository"
 	"github.com/gin-gonic/gin"
 	"github.com/o1egl/paseto"
 )

@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/fat/common/indikators"
-	"github.com/fat/common/mailer"
-	"github.com/fat/models"
-	"github.com/fat/usecase/exchange"
-	"github.com/fat/usecase/telegram"
+	"github.com/Fatiri/fat/common/indikators"
+	"github.com/Fatiri/fat/common/mailer"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/usecase/exchange"
+	"github.com/Fatiri/fat/usecase/telegram"
 )
 
 type IndodaxCLI interface {
@@ -74,9 +74,9 @@ func (icc *IndodaxCLICtx) Run() error {
 				fmt.Sprintf("Information  <br> Saldo : %2.f <br> BTC : %f <br> Pair : %s <br><br>", saldo, btc, payload.Symbol),
 				fmt.Sprintf("RSI   <br> Up Price : %t <br> Down Price : %t <br> Close Price : %2.f <br> rsi : %2.f", upPrice, downPrice, mh.Close[len(mh.Close)-1], rsiResult),
 			}
-			fmt.Println(hour,minute)
+			fmt.Println(hour, minute)
 
-			if (hour%2 == 0 && minute == 1) {
+			if hour%2 == 0 && minute == 1 {
 				icc.gmail.V1(mailer.GmailPayload{
 					ReceiverEmail: icc.config.Env.ReceiverMailReport,
 					Subject:       icc.config.Env.TitleApp,

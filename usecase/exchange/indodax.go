@@ -5,11 +5,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/fat/common/constant"
-	"github.com/fat/common/crypto"
-	"github.com/fat/models"
-	"github.com/fat/repository"
-	"github.com/fat/usecase/webhook"
+	"github.com/Fatiri/fat/common/constant"
+	"github.com/Fatiri/fat/common/crypto"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/repository"
+	"github.com/Fatiri/fat/usecase/webhook"
 )
 
 type Indodax interface {

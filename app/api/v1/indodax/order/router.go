@@ -3,9 +3,9 @@ package indodaxorderv1
 import (
 	"fmt"
 
-	"github.com/fat/middleware"
-	"github.com/fat/models"
-	"github.com/fat/repository"
+	"github.com/Fatiri/fat/middleware"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/repository"
 	"github.com/google/uuid"
 )
 

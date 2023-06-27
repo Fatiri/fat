@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/fat/common/client"
-	mocks "github.com/fat/mocks/common/client"
+	"github.com/Fatiri/fat/common/client"
+	mocks "github.com/Fatiri/fat/mocks/common/client"
 	"github.com/stretchr/testify/assert"
 )
 

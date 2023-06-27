@@ -4,14 +4,14 @@ import (
 	"net/http"
 	"strings"
 
-	indodaxmarketv1 "github.com/fat/app/api/v1/indodax/market"
-	indodaxorderv1 "github.com/fat/app/api/v1/indodax/order"
-	"github.com/fat/common/wrapper"
-	"github.com/fat/docs"
-	"github.com/fat/models"
+	indodaxmarketv1 "github.com/Fatiri/fat/app/api/v1/indodax/market"
+	indodaxorderv1 "github.com/Fatiri/fat/app/api/v1/indodax/order"
+	"github.com/Fatiri/fat/common/wrapper"
+	"github.com/Fatiri/fat/docs"
+	"github.com/Fatiri/fat/models"
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"github.com/swaggo/files"
 )
 
 type Server interface {

@@ -1,8 +1,8 @@
 package indodaxmarketv1
 
 import (
-	"github.com/fat/middleware"
-	"github.com/fat/models"
+	"github.com/Fatiri/fat/middleware"
+	"github.com/Fatiri/fat/models"
 )
 
 type Router struct {

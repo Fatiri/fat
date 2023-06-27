@@ -1,8 +1,8 @@
 package models
 
 import (
-	"github.com/fat/common/times"
-	"github.com/fat/repository"
+	"github.com/Fatiri/fat/common/times"
+	"github.com/Fatiri/fat/repository"
 	"github.com/gin-gonic/gin"
 )
 

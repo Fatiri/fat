@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	models "github.com/fat/models"
+	models "github.com/Fatiri/fat/models"
 	mock "github.com/stretchr/testify/mock"
 )
 

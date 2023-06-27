@@ -3,8 +3,8 @@ package config_test
 import (
 	"testing"
 
-	"github.com/fat/config"
-	"github.com/fat/models"
+	"github.com/Fatiri/fat/config"
+	"github.com/Fatiri/fat/models"
 	"github.com/stretchr/testify/assert"
 )
 

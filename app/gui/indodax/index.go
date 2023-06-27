@@ -10,9 +10,9 @@ import (
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
-	"github.com/fat/app/gui/component"
-	"github.com/fat/models"
-	"github.com/fat/usecase/exchange"
+	"github.com/Fatiri/fat/app/gui/component"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/usecase/exchange"
 	"github.com/fyne-io/examples/img/icon"
 )
 

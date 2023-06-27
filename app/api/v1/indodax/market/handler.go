@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/fat/common/wrapper"
-	"github.com/fat/models"
-	"github.com/fat/usecase/exchange"
+	"github.com/Fatiri/fat/common/wrapper"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/usecase/exchange"
 	"github.com/gin-gonic/gin"
 )
 

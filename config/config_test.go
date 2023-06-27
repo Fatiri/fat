@@ -4,10 +4,10 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/fat/config"
-	mocksConfig "github.com/fat/mocks/config"
-	"github.com/fat/models"
-	"github.com/fat/repository"
+	"github.com/Fatiri/fat/config"
+	mocksConfig "github.com/Fatiri/fat/mocks/config"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/repository"
 	"github.com/stretchr/testify/assert"
 )
 

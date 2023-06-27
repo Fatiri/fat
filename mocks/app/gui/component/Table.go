@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	component "github.com/fat/app/gui/component"
+	component "github.com/Fatiri/fat/app/gui/component"
 	mock "github.com/stretchr/testify/mock"
 
 	widget "fyne.io/fyne/v2/widget"

@@ -4,12 +4,12 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/fat/app/api"
-	"github.com/fat/app/cli"
-	"github.com/fat/app/gui"
-	"github.com/fat/common/times"
-	"github.com/fat/config"
-	"github.com/fat/models"
+	"github.com/Fatiri/fat/app/api"
+	"github.com/Fatiri/fat/app/cli"
+	"github.com/Fatiri/fat/app/gui"
+	"github.com/Fatiri/fat/common/times"
+	"github.com/Fatiri/fat/config"
+	"github.com/Fatiri/fat/models"
 	"github.com/gin-gonic/gin"
 )
 

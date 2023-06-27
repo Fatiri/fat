@@ -1,6 +1,6 @@
 package indodaxmarketv1
 
-import "github.com/fat/models"
+import "github.com/Fatiri/fat/models"
 
 func InjectMarketRouter(config *models.Config) {
 	handlers := NewMarketHandler(config)

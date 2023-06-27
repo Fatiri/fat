@@ -5,9 +5,9 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/fat/common/client"
-	"github.com/fat/common/crypto"
-	"github.com/fat/models"
+	"github.com/Fatiri/fat/common/client"
+	"github.com/Fatiri/fat/common/crypto"
+	"github.com/Fatiri/fat/models"
 )
 
 type IndodaxWebhook interface {

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/fat/repository"
+	"github.com/Fatiri/fat/repository"
 	"github.com/google/uuid"
 )
 

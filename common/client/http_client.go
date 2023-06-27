@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fat/models"
+	"github.com/Fatiri/fat/models"
 	"github.com/go-resty/resty/v2"
 )
 

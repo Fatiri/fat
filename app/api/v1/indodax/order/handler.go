@@ -3,10 +3,10 @@ package indodaxorderv1
 import (
 	"net/http"
 
-	"github.com/fat/common/wrapper"
-	"github.com/fat/models"
-	"github.com/fat/repository"
-	"github.com/fat/usecase/exchange"
+	"github.com/Fatiri/fat/common/wrapper"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/repository"
+	"github.com/Fatiri/fat/usecase/exchange"
 	"github.com/gin-gonic/gin"
 )
 

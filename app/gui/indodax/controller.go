@@ -9,10 +9,10 @@ import (
 	"time"
 
 	"fyne.io/fyne/v2/dialog"
-	"github.com/fat/common/indikators"
-	"github.com/fat/common/manipulator"
-	"github.com/fat/models"
-	"github.com/fat/repository"
+	"github.com/Fatiri/fat/common/indikators"
+	"github.com/Fatiri/fat/common/manipulator"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/repository"
 	"github.com/yudapc/go-rupiah"
 )
 

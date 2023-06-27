@@ -3,11 +3,11 @@ package cli
 import (
 	"time"
 
-	"github.com/fat/app/cli/indodax"
-	"github.com/fat/common/mailer"
-	"github.com/fat/models"
-	"github.com/fat/usecase/exchange"
-	"github.com/fat/usecase/telegram"
+	"github.com/Fatiri/fat/app/cli/indodax"
+	"github.com/Fatiri/fat/common/mailer"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/usecase/exchange"
+	"github.com/Fatiri/fat/usecase/telegram"
 )
 
 type CLICore interface {

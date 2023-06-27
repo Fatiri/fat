@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/fat/models"
+	"github.com/Fatiri/fat/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -32,10 +32,10 @@ func (c *ConfigCtx) InitConfig() (conf *models.Config, err error) {
 	}
 
 	conf = &models.Config{
-		Env:       env,
-		Storage:   storage,
+		Env:         env,
+		Storage:     storage,
 		ServiceType: env.EnvApp,
-		GinRouter: gin.Default(),
+		GinRouter:   gin.Default(),
 	}
 
 	return

@@ -3,7 +3,7 @@ package config
 import (
 	"errors"
 
-	"github.com/fat/models"
+	"github.com/Fatiri/fat/models"
 	"github.com/spf13/viper"
 )
 

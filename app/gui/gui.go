@@ -7,11 +7,11 @@ import (
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
-	"github.com/fat/app/gui/component"
-	indodaxgui "github.com/fat/app/gui/indodax"
-	"github.com/fat/middleware"
-	"github.com/fat/models"
-	"github.com/fat/repository"
+	"github.com/Fatiri/fat/app/gui/component"
+	indodaxgui "github.com/Fatiri/fat/app/gui/indodax"
+	"github.com/Fatiri/fat/middleware"
+	"github.com/Fatiri/fat/models"
+	"github.com/Fatiri/fat/repository"
 	"github.com/google/uuid"
 )
 
